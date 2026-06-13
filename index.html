@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💸 The Stupidly Rich Tracker 💸</title>
+  <meta name="description" content="Track the top 20 richest humans and understand their absurd wealth with ridiculous comparisons." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💸</text></svg>" />
+</head>
+<body>
+  <!-- floating money emoji rain -->
+  <div id="money-rain" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="hero-badge">🤑 LIVE-ish WEALTH TRACKER 🤑</div>
+    <h1 class="hero-title">The <span class="wiggle">Stupidly</span> Rich Tracker</h1>
+    <p class="hero-sub">
+      The top <strong>20 richest humans</strong> on Earth — and the gloriously absurd ways
+      to understand just how <em>obscenely</em> loaded they are. 💅
+    </p>
+    <div class="hero-stats">
+      <div class="big-stat">
+        <span class="big-stat-num" id="combined-worth">$0</span>
+        <span class="big-stat-label">Combined net worth of the Top 20</span>
+      </div>
+    </div>
+    <p class="hero-disclaimer">
+      ⚠️ Numbers are approximate, for-fun, and change faster than a billionaire's mood. Not financial advice. Obviously.
+    </p>
+  </header>
+
+  <!-- ================= LEADERBOARD ================= -->
+  <section class="section">
+    <h2 class="section-title">🏆 The Leaderboard of Absurdity</h2>
+    <p class="section-sub">Click anyone to throw their fortune into the Reality Machine 👇</p>
+    <div id="leaderboard" class="leaderboard"></div>
+  </section>
+
+  <!-- ================= REALITY MACHINE ================= -->
+  <section class="section reality" id="reality">
+    <h2 class="section-title">🤯 The Reality Machine</h2>
+    <p class="section-sub">Pick a billionaire and watch math ruin your day.</p>
+
+    <div class="machine">
+      <div class="machine-head">
+        <select id="person-select" class="person-select"></select>
+        <div class="selected-worth">
+          <span id="selected-name">Pick someone</span>
+          <span id="selected-worth" class="selected-worth-num">$0</span>
+        </div>
+      </div>
+
+      <div id="comparisons" class="comparisons"></div>
+    </div>
+  </section>
+
+  <!-- ================= SPEND-O-MATIC ================= -->
+  <section class="section spendomatic" id="spendomatic">
+    <h2 class="section-title">🛍️ The Spend-O-Matic</h2>
+    <p class="section-sub">
+      How long would it take <span id="spend-name" class="hl">this person</span> to go broke
+      if they YOLO-spent every single day? Slide to set the daily burn. 🔥
+    </p>
+
+    <div class="spend-controls">
+      <label for="spend-slider">Spending <strong id="spend-rate">$1,000,000</strong> per day:</label>
+      <input type="range" id="spend-slider" min="3" max="9" step="0.01" value="6" />
+      <div class="spend-presets">
+        <button data-amt="1000">$1k/day</button>
+        <button data-amt="100000">$100k/day</button>
+        <button data-amt="1000000" class="active">$1M/day</button>
+        <button data-amt="10000000">$10M/day</button>
+        <button data-amt="100000000">$100M/day</button>
+      </div>
+    </div>
+
+    <div class="spend-result">
+      <span class="spend-result-num" id="spend-years">—</span>
+      <span class="spend-result-label">to burn through it all 💨</span>
+    </div>
+    <p class="spend-flavor" id="spend-flavor"></p>
+  </section>
+
+  <!-- ================= YOU vs THEM ================= -->
+  <section class="section youvsthem" id="youvsthem">
+    <h2 class="section-title">🧍 You vs. Them</h2>
+    <p class="section-sub">Type your net worth and feel a feeling. (We won't store it. We can't even.)</p>
+
+    <div class="you-controls">
+      <span class="dollar-prefix">$</span>
+      <input type="number" id="your-worth" placeholder="5000" value="5000" min="0" />
+      <select id="vs-select" class="person-select"></select>
+    </div>
+    <div class="you-result" id="you-result"></div>
+  </section>
+
+  <footer class="footer">
+    <p>Made with 💸, ☕, and a deeply unhealthy amount of zeros.</p>
+    <p class="footer-small">Figures are illustrative & for entertainment. The billionaires are real. Sadly.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
