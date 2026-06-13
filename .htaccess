@@ -1,0 +1,39 @@
+# ============================================================
+# 💸 Rich Tracker — security hardening for Apache hosts (GoDaddy etc.)
+# Drop this in the same folder as index.html. GoDaddy Linux/cPanel
+# hosting is Apache and reads .htaccess automatically.
+# ============================================================
+
+# ---- Force HTTPS (so nobody can tamper in transit) ----
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+# ---- Security response headers ----
+<IfModule mod_headers.c>
+  # If you enable a live API on another host, add it to connect-src
+  # (e.g. connect-src 'self' https://rich-tracker-api.you.workers.dev)
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Don't advertise the server software
+  Header always unset X-Powered-By
+  Header unset Server
+</IfModule>
+
+# ---- Don't serve source/config/dev files ----
+<FilesMatch "(^\.|\.(htaccess|md|map|json|sh)$|worker\.js)">
+  Require all denied
+</FilesMatch>
+
+# ---- Disable directory listing ----
+Options -Indexes
+ServerSignature Off

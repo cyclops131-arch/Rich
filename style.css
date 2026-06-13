@@ -1,0 +1,283 @@
+/* ===========================================================
+   💸 THE STUPIDLY RICH TRACKER — funky styles
+   =========================================================== */
+
+:root {
+  --bg: #1a1140;
+  --bg2: #2d1b69;
+  --hot: #ff2e93;
+  --gold: #ffd23f;
+  --mint: #06ffa5;
+  --sky: #4dd0ff;
+  --purple: #b026ff;
+  --ink: #1a1140;
+  --card: #2a1d5e;
+  --shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Fredoka", system-ui, sans-serif;
+  color: #fff;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(176, 38, 255, 0.35), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(255, 46, 147, 0.30), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(6, 255, 165, 0.20), transparent 45%),
+    linear-gradient(160deg, var(--bg), var(--bg2));
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* ---------- money rain ---------- */
+#money-rain { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.money-drop {
+  position: absolute;
+  top: -10%;
+  font-size: 1.6rem;
+  animation: fall linear infinite;
+  opacity: 0.7;
+  user-select: none;
+}
+@keyframes fall {
+  0%   { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 4rem 1.2rem 2.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 3px solid #000;
+  box-shadow: var(--shadow);
+  transform: rotate(-2deg);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.5px;
+}
+.hero-title {
+  font-family: "Bagel Fat One", cursive;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  line-height: 1.05;
+  text-shadow: 4px 4px 0 var(--hot), 8px 8px 0 rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+.wiggle { color: var(--mint); display: inline-block; animation: wiggle 2.5s ease-in-out infinite; }
+@keyframes wiggle { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+.hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.35rem); max-width: 680px; margin: 0 auto 1.8rem; opacity: 0.95; }
+.hero-sub strong { color: var(--gold); }
+.hero-sub em { color: var(--mint); font-style: normal; }
+
+.hero-stats { margin: 1.5rem 0; }
+.big-stat {
+  background: var(--card);
+  border: 4px solid #000;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem 2rem;
+  display: inline-block;
+  transform: rotate(1deg);
+}
+.big-stat-num {
+  display: block;
+  font-family: "Space Grotesk", monospace;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 2px 2px 0 #000;
+}
+.big-stat-label { font-size: 0.95rem; opacity: 0.85; }
+.hero-disclaimer { font-size: 0.85rem; opacity: 0.6; margin-top: 1.5rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+.data-status {
+  display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 1.2rem;
+  background: rgba(0,0,0,0.25); border: 2px solid #000; border-radius: 999px;
+  padding: 0.35rem 0.4rem 0.35rem 1rem; font-size: 0.85rem;
+}
+.data-status-text { opacity: 0.9; }
+#refresh-btn {
+  font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 0.8rem;
+  padding: 0.3rem 0.8rem; border-radius: 999px; border: 2px solid #000;
+  background: var(--mint); color: var(--ink); cursor: pointer;
+}
+#refresh-btn:disabled { opacity: 0.5; cursor: progress; }
+
+/* ---------- sections ---------- */
+.section { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 3rem 1.2rem; }
+.section-title {
+  font-family: "Bagel Fat One", cursive;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-align: center;
+  text-shadow: 3px 3px 0 var(--purple);
+  margin-bottom: 0.5rem;
+}
+.section-sub { text-align: center; opacity: 0.85; margin-bottom: 2rem; font-size: 1.05rem; }
+.hl { color: var(--mint); font-weight: 700; }
+
+/* ---------- leaderboard ---------- */
+.leaderboard { display: grid; gap: 0.9rem; }
+.rich-card {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  background: var(--card);
+  border: 3px solid #000;
+  border-radius: 18px;
+  padding: 0.9rem 1.2rem;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  text-align: left;
+}
+.rich-card:hover { transform: translate(-3px, -3px) rotate(-0.5deg); box-shadow: 9px 9px 0 rgba(0,0,0,0.4); }
+.rich-card:active { transform: translate(2px, 2px); box-shadow: 3px 3px 0 rgba(0,0,0,0.4); }
+.rc-rank {
+  font-family: "Bagel Fat One", cursive;
+  font-size: 1.6rem;
+  color: var(--ink);
+  background: var(--gold);
+  border: 3px solid #000;
+  border-radius: 12px;
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+}
+.rich-card:nth-child(1) .rc-rank { background: var(--gold); }
+.rich-card:nth-child(2) .rc-rank { background: #d9d9d9; }
+.rich-card:nth-child(3) .rc-rank { background: #ff9d5c; }
+.rc-emoji { font-size: 2rem; }
+.rc-info { min-width: 0; }
+.rc-name { font-weight: 700; font-size: 1.2rem; }
+.rc-company { font-size: 0.85rem; opacity: 0.75; }
+.rc-quip { font-size: 0.8rem; opacity: 0.6; font-style: italic; margin-top: 0.15rem; }
+.rc-worth {
+  font-family: "Space Grotesk", monospace;
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  color: var(--mint);
+  text-align: right;
+  white-space: nowrap;
+}
+.rc-worth small { display: block; font-size: 0.65rem; opacity: 0.6; color: #fff; font-weight: 400; }
+
+/* ---------- reality machine ---------- */
+.machine { background: rgba(0,0,0,0.25); border: 4px solid #000; border-radius: 28px; padding: 1.5rem; box-shadow: var(--shadow); }
+.machine-head { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.person-select {
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 14px;
+  border: 3px solid #000;
+  background: var(--gold);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.35);
+  max-width: 100%;
+}
+.selected-worth { text-align: right; }
+#selected-name { display: block; font-weight: 700; font-size: 1.1rem; }
+.selected-worth-num { font-family: "Space Grotesk", monospace; font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 700; color: var(--gold); }
+
+.comparisons { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+.comp-card {
+  background: var(--card);
+  border: 3px solid #000;
+  border-radius: 18px;
+  padding: 1.2rem;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+  animation: pop 0.4s ease backwards;
+}
+@keyframes pop { from { opacity: 0; transform: scale(0.8) translateY(10px); } to { opacity: 1; transform: scale(1); } }
+.comp-emoji { font-size: 2.2rem; }
+.comp-num { font-family: "Space Grotesk", monospace; font-size: 1.7rem; font-weight: 700; color: var(--mint); margin: 0.3rem 0; line-height: 1.1; }
+.comp-label { font-size: 0.95rem; opacity: 0.9; }
+.comp-sub { font-size: 0.8rem; opacity: 0.6; margin-top: 0.4rem; }
+
+/* ---------- spend-o-matic ---------- */
+.spendomatic { text-align: center; }
+.spend-controls { background: var(--card); border: 4px solid #000; border-radius: 24px; padding: 1.5rem; box-shadow: var(--shadow); max-width: 640px; margin: 0 auto 1.5rem; }
+.spend-controls label { display: block; font-size: 1.15rem; margin-bottom: 1rem; }
+#spend-rate { color: var(--gold); }
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 16px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--mint), var(--gold), var(--hot));
+  border: 3px solid #000; cursor: pointer; outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #fff; border: 3px solid #000; cursor: grab;
+  box-shadow: 0 0 0 4px var(--hot);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #fff; border: 3px solid #000; cursor: grab;
+  box-shadow: 0 0 0 4px var(--hot);
+}
+.spend-presets { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.2rem; }
+.spend-presets button {
+  font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 0.9rem;
+  padding: 0.45rem 0.9rem; border-radius: 999px; border: 3px solid #000;
+  background: #fff; color: var(--ink); cursor: pointer; transition: transform 0.1s;
+}
+.spend-presets button:hover { transform: translateY(-2px); }
+.spend-presets button.active { background: var(--hot); color: #fff; }
+.spend-result-num { display: block; font-family: "Bagel Fat One", cursive; font-size: clamp(2.5rem, 9vw, 5rem); color: var(--gold); text-shadow: 3px 3px 0 var(--hot); }
+.spend-result-label { font-size: 1.1rem; opacity: 0.85; }
+.spend-flavor { margin-top: 1rem; font-size: 1.05rem; font-style: italic; color: var(--mint); min-height: 1.5em; }
+
+/* ---------- you vs them ---------- */
+.youvsthem { text-align: center; }
+.you-controls { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; align-items: center; margin-bottom: 1.5rem; }
+.dollar-prefix { font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+#your-worth {
+  font-family: "Space Grotesk", monospace; font-size: 1.3rem; font-weight: 700;
+  padding: 0.6rem 1rem; border-radius: 14px; border: 3px solid #000;
+  width: 180px; text-align: center; box-shadow: 3px 3px 0 rgba(0,0,0,0.35);
+}
+.you-result {
+  background: var(--card); border: 4px solid #000; border-radius: 24px;
+  padding: 2rem; box-shadow: var(--shadow); max-width: 720px; margin: 0 auto;
+  font-size: 1.15rem;
+}
+.you-result .big { font-family: "Bagel Fat One", cursive; font-size: clamp(2rem, 7vw, 3.2rem); color: var(--gold); display: block; margin: 0.5rem 0; text-shadow: 2px 2px 0 var(--hot); }
+.you-result .punch { color: var(--mint); font-weight: 700; }
+.you-result .vs-gap { margin-top: 1rem; }
+
+/* ---------- footer ---------- */
+.footer { position: relative; z-index: 1; text-align: center; padding: 3rem 1.2rem; opacity: 0.8; }
+.footer-small { font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 560px) {
+  .rich-card { grid-template-columns: auto auto 1fr; }
+  .rc-worth { grid-column: 2 / 4; text-align: left; }
+  .rc-quip { display: none; }
+  .machine-head { flex-direction: column; align-items: stretch; }
+  .selected-worth { text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .money-drop, .wiggle { animation: none; }
+  html { scroll-behavior: auto; }
+}
