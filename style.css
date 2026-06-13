@@ -105,6 +105,20 @@ body {
 .big-stat-label { font-size: 0.95rem; opacity: 0.85; }
 .hero-disclaimer { font-size: 0.85rem; opacity: 0.6; margin-top: 1.5rem; max-width: 560px; margin-left: auto; margin-right: auto; }
 
+.data-status {
+  display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 1.2rem;
+  background: rgba(0,0,0,0.25); border: 2px solid #000; border-radius: 999px;
+  padding: 0.35rem 0.4rem 0.35rem 1rem; font-size: 0.85rem;
+}
+.data-status-text { opacity: 0.9; }
+#refresh-btn {
+  font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 0.8rem;
+  padding: 0.3rem 0.8rem; border-radius: 999px; border: 2px solid #000;
+  background: var(--mint); color: var(--ink); cursor: pointer;
+}
+#refresh-btn:disabled { opacity: 0.5; cursor: progress; }
+
 /* ---------- sections ---------- */
 .section { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 3rem 1.2rem; }
 .section-title {
@@ -248,6 +262,7 @@ input[type="range"]::-moz-range-thumb {
 }
 .you-result .big { font-family: "Bagel Fat One", cursive; font-size: clamp(2rem, 7vw, 3.2rem); color: var(--gold); display: block; margin: 0.5rem 0; text-shadow: 2px 2px 0 var(--hot); }
 .you-result .punch { color: var(--mint); font-weight: 700; }
+.you-result .vs-gap { margin-top: 1rem; }
 
 /* ---------- footer ---------- */
 .footer { position: relative; z-index: 1; text-align: center; padding: 3rem 1.2rem; opacity: 0.8; }
