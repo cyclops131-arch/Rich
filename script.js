@@ -160,10 +160,10 @@ function comparisonsFor(worth) {
       ? "You'd have had to start before the dinosaurs went extinct."
       : "You'd need to start roughly " + commas(yearsAt100k) + " years ago. Got a time machine?");
 
-  const ratio = worth / 1e6;
-  add("🤔", commas(ratio / 86400 / 365) + " yrs",
-    "if each dollar were 1 second",
-    "$1 million = ~11.5 days. This fortune = " + commas(ratio / 86400 / 365) + " years. Let that sink in.");
+  const perPerson = worth / 8.1e9; // every human alive
+  add("🌐", "$" + commas(perPerson),
+    "handed to EVERY human on Earth (all 8.1 billion of us)",
+    "One person could gift the entire planet $" + commas(perPerson) + " each. Try not to spend it all at once.");
 
   return out;
 }
@@ -213,8 +213,9 @@ function describeDuration(years) {
 }
 function spendFlavor(years) {
   if (years < 1) return "Blink and it's gone. Even billionaires can speedrun bankruptcy. 💀";
-  if (years < 10) return "A whole decade-ish of insane spending. Rookie numbers, honestly.";
-  if (years < 100) return "Longer than most people are alive. And they'd STILL have change.";
+  if (years < 10) return "A decade-ish of unhinged spending. Rookie numbers, honestly.";
+  if (years < 40) return "Decades of relentless splurging — and they'd STILL have loads left. 🤷";
+  if (years < 100) return "Nearly a whole lifetime of max spending. They'd die with change to spare.";
   if (years < 1000) return "You'd die of old age many times over before the money ran out. 🪦";
   if (years < 100000) return "Civilizations would rise and fall. The money? Still there. 🏛️";
   return "The sun will be noticeably older by the time this runs out. ☀️";
@@ -292,9 +293,10 @@ function updateStatus(meta) {
   const el = document.getElementById("data-status");
   if (!el) return;
   let txt;
+  var asOf = (typeof DATA_AS_OF !== "undefined") ? DATA_AS_OF : "Curated data";
   if (meta.source === "live") txt = "🟢 Live data" + (meta.updatedAt ? " · updated " + esc(meta.updatedAt) : "");
-  else if (meta.source === "fallback") txt = "🟡 Live source unreachable — showing curated data";
-  else txt = "📦 Curated data (offline-safe)";
+  else if (meta.source === "fallback") txt = "🟡 Live source down — showing " + esc(asOf);
+  else txt = "📦 " + esc(asOf);
   el.querySelector(".data-status-text").innerHTML = txt;
 }
 
