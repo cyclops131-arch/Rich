@@ -293,9 +293,10 @@ function updateStatus(meta) {
   const el = document.getElementById("data-status");
   if (!el) return;
   let txt;
+  var asOf = (typeof DATA_AS_OF !== "undefined") ? DATA_AS_OF : "Curated data";
   if (meta.source === "live") txt = "🟢 Live data" + (meta.updatedAt ? " · updated " + esc(meta.updatedAt) : "");
-  else if (meta.source === "fallback") txt = "🟡 Live source unreachable — showing curated data";
-  else txt = "📦 Curated data (offline-safe)";
+  else if (meta.source === "fallback") txt = "🟡 Live source down — showing " + esc(asOf);
+  else txt = "📦 " + esc(asOf);
   el.querySelector(".data-status-text").innerHTML = txt;
 }
 
